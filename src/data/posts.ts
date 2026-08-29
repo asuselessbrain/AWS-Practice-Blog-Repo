@@ -75,6 +75,19 @@ export const posts: Post[] = [
       "There are still a few things to improve later, including refresh tokens, token expiration, secure cookie configuration, and better handling of authentication errors.",
     ],
   },
+  {
+  slug: "optimizing-nextjs-page-performance",
+  title: "Optimizing Next.js page performance",
+  date: "2026-08-18",
+  excerpt:
+    "A quick look at the techniques I'm using to make Next.js pages load faster and keep the overall experience smooth.",
+  tag: "nextjs",
+  body: [
+    "The goal is to understand which parts of a Next.js application have the biggest impact on loading speed and how to identify unnecessary work.",
+    "The main improvements include optimizing images, reducing client-side JavaScript, using server components where possible, and making sure data fetching happens efficiently.",
+    "Once the basic optimizations are in place, the next step is measuring the actual performance with tools like Lighthouse and Core Web Vitals instead of relying only on how fast the page feels.",
+  ],
+},
 ];
 
 export function getPostBySlug(slug: string) {
