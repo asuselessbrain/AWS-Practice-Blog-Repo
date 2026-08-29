@@ -45,6 +45,16 @@ jobs:
 
           script: |
             echo "Deploying application..."
+
+            # ১. কোনো কমান্ড ফেল করলে স্ক্রিপ্ট যেন থামে
+            set -e
+
+            # ২. Node, Yarn এবং PM2-এর Environment variables লোড করা
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export PATH=$PATH:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -n 1)/bin:$HOME/.yarn/bin
+
+            
             echo "🚀 Navigating to project..."
             cd ~/AWS-Practice-Blog-Repo
 
