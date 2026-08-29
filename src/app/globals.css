@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4f1e6;
+  --ink: #1a1a18;
+  --rule: #1a1a18;
+  --accent: #8c1c1c;
+  --pine: #2f6f5e;
+  --muted: #6b665a;
+  --line: #ded8c4;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-pine: var(--pine);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-source-serif);
+  --font-mono: var(--font-jetbrains);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  background-image: radial-gradient(
+    rgba(26, 26, 24, 0.035) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 3px 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+/* Masthead double rule, drawn in on load */
+.masthead-rule {
+  transform-origin: left center;
+  animation: draw-in 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+@keyframes draw-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Animated underline on headline links */
+.headline-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.35s ease, color 0.25s ease;
+}
+
+.headline-link:hover {
+  color: var(--accent);
+  background-size: 100% 1px;
+}
+
+/* Drop cap for lead paragraphs */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.85;
+  padding-right: 0.08em;
+  padding-top: 0.03em;
+  color: var(--accent);
+}
+
+/* Scroll / load reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cursor-blink::after {
+  content: "";
+  display: inline-block;
+  width: 0.5ch;
+  height: 1em;
+  background: var(--accent);
+  margin-left: 4px;
+  vertical-align: -0.12em;
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink::after,
+  .masthead-rule {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
