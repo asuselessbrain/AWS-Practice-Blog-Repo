@@ -35,44 +35,46 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "deploying-to-an-ec2-box",
-    title: "Deploying to an EC2 box",
-    date: "2026-08-26",
+    slug: "setting-up-a-postgresql-database",
+    title: "Setting up a PostgreSQL database",
+    date: "2026-08-24",
     excerpt:
-      "The plan for taking this app off my laptop and onto a small EC2 instance: build, process manager, reverse proxy, done.",
-    tag: "aws",
+      "A practical look at connecting a PostgreSQL database to the application and keeping the configuration simple during development.",
+    tag: "database",
     body: [
-      "The goal isn't a production-grade setup — it's understanding what actually happens between 'yarn build' and a URL that responds over port 80.",
-      "Rough shape of the plan: a small EC2 instance running Node, the app built with yarn build and kept alive with a process manager like pm2, and Nginx in front of it as a reverse proxy so port 80 forwards to Next.js on port 3000.",
-      "Everything after that — a domain name, HTTPS with Let's Encrypt, CI/CD — is a follow-up entry once the basic version is actually reachable from outside the VPC.",
+      "The goal is to understand how the application communicates with PostgreSQL and what actually happens when a database connection is established.",
+      "The basic setup includes creating a database, configuring the connection string through environment variables, and using Prisma to manage the database schema and queries.",
+      "Once the local setup is working correctly, the next step will be moving the database to a hosted environment and making sure migrations and backups are handled properly.",
     ],
   },
+
   {
-    slug: "deploying-to-an-ec2-box",
-    title: "Deploying to an EC2 box",
-    date: "2026-08-26",
+    slug: "building-a-reusable-api-layer",
+    title: "Building a reusable API layer",
+    date: "2026-08-22",
     excerpt:
-      "The plan for taking this app off my laptop and onto a small EC2 instance: build, process manager, reverse proxy, done.",
-    tag: "aws",
+      "Designing a clean API structure that keeps request handling, business logic, and database operations separated from each other.",
+    tag: "backend",
     body: [
-      "The goal isn't a production-grade setup — it's understanding what actually happens between 'yarn build' and a URL that responds over port 80.",
-      "Rough shape of the plan: a small EC2 instance running Node, the app built with yarn build and kept alive with a process manager like pm2, and Nginx in front of it as a reverse proxy so port 80 forwards to Next.js on port 3000.",
-      "Everything after that — a domain name, HTTPS with Let's Encrypt, CI/CD — is a follow-up entry once the basic version is actually reachable from outside the VPC.",
+      "The main focus is keeping the backend organized instead of putting every piece of logic directly inside the route handlers.",
+      "The structure separates routes, controllers, services, and database operations so that each part has a clear responsibility and can be changed without affecting the entire application.",
+      "After the basic API structure is ready, authentication, validation, error handling, and proper response formatting can be added on top of it.",
     ],
   },
+
   {
-    slug: "deploying-to-an-ec2-box",
-    title: "Deploying to an EC2 box",
-    date: "2026-08-26",
+    slug: "adding-authentication-with-jwt",
+    title: "Adding authentication with JWT",
+    date: "2026-08-20",
     excerpt:
-      "The plan for taking this app off my laptop and onto a small EC2 instance: build, process manager, reverse proxy, done.",
-    tag: "aws",
+      "Exploring a simple JWT-based authentication flow for protecting API routes and managing logged-in users.",
+    tag: "authentication",
     body: [
-      "The goal isn't a production-grade setup — it's understanding what actually happens between 'yarn build' and a URL that responds over port 80.",
-      "Rough shape of the plan: a small EC2 instance running Node, the app built with yarn build and kept alive with a process manager like pm2, and Nginx in front of it as a reverse proxy so port 80 forwards to Next.js on port 3000.",
-      "Everything after that — a domain name, HTTPS with Let's Encrypt, CI/CD — is a follow-up entry once the basic version is actually reachable from outside the VPC.",
+      "The first step is understanding the complete authentication flow, from user login to generating a token and sending it back to the client.",
+      "The backend can verify the JWT on protected requests and use the decoded information to identify the current user before allowing access to restricted resources.",
+      "There are still a few things to improve later, including refresh tokens, token expiration, secure cookie configuration, and better handling of authentication errors.",
     ],
-  }
+  },
 ];
 
 export function getPostBySlug(slug: string) {
