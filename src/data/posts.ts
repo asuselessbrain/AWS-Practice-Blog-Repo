@@ -47,6 +47,19 @@ export const posts: Post[] = [
       "Everything after that — a domain name, HTTPS with Let's Encrypt, CI/CD — is a follow-up entry once the basic version is actually reachable from outside the VPC.",
     ],
   },
+  {
+    slug: "deploying-to-an-ec2-box",
+    title: "Deploying to an EC2 box",
+    date: "2026-08-26",
+    excerpt:
+      "The plan for taking this app off my laptop and onto a small EC2 instance: build, process manager, reverse proxy, done.",
+    tag: "aws",
+    body: [
+      "The goal isn't a production-grade setup — it's understanding what actually happens between 'yarn build' and a URL that responds over port 80.",
+      "Rough shape of the plan: a small EC2 instance running Node, the app built with yarn build and kept alive with a process manager like pm2, and Nginx in front of it as a reverse proxy so port 80 forwards to Next.js on port 3000.",
+      "Everything after that — a domain name, HTTPS with Let's Encrypt, CI/CD — is a follow-up entry once the basic version is actually reachable from outside the VPC.",
+    ],
+  }
 ];
 
 export function getPostBySlug(slug: string) {

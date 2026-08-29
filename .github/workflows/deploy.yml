@@ -1,0 +1,54 @@
+name: Deploy to private server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'yarn'
+        
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run Unit Tests
+        run: yarn test
+
+  deploy:
+    name: Deploy to Private Server
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:      
+      - name: Set up SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.TARGET_SERVER_IP }}
+          username: ${{ secrets.TARGET_SERVER_USER }}
+          key: ${{ secrets.TARGET_SERVER_SSH_KEY }}
+
+          proxy_host: ${{ secrets.PROXY_SERVER_IP }}
+          proxy_username: ${{ secrets.PROXY_SERVER_USER }}
+          proxy_key: ${{ secrets.PROXY_SERVER_SSH_KEY }}
+          proxy_port: ${{ secrets.PROXY_SERVER_PORT }}
+
+          script: |
+            echo "Deploying application..."
+            cd ~/AWS-Practice-Blog-Repo
+
+            git pull origin main
+            yarn install --production --frozen-lockfile
+            pm2 restart 0
+
+            echo "✅ Deployment completed successfully!"
