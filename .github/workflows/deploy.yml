@@ -45,12 +45,19 @@ jobs:
 
           script: |
             echo "Deploying application..."
+            echo "🚀 Navigating to project..."
             cd ~/AWS-Practice-Blog-Repo
 
+            echo "📥 Fetching latest code..."
             git pull origin main
+
+            echo "📦 Installing dependencies..."
             yarn install --frozen-lockfile
 
+            echo "🏗️ Building Next.js application..."
             yarn build
+
+            echo "🔄 Restarting PM2 process..."
             pm2 restart blog-demo:3000
 
             echo "✅ Deployment completed successfully!"
