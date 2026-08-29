@@ -51,6 +51,6 @@ jobs:
             yarn install --frozen-lockfile
 
             yarn build
-            pm2 restart 0
+            pm2 restart blog-demo:3000
 
             echo "✅ Deployment completed successfully!"
