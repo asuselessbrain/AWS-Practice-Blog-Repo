@@ -49,6 +49,8 @@ jobs:
 
             git pull origin main
             yarn install --production --frozen-lockfile
+
+            yarn build
             pm2 restart 0
 
             echo "✅ Deployment completed successfully!"
